@@ -15,6 +15,11 @@ You can easily use `pip install` to install these libraries
 
 
 ## How to use the code
+First of all, you need a Google Fusion Tables API authorization key
+[Google Fusion Tables REST API](https://developers.google.com/fusiontables/docs/v2/using)
+
+The default key value is mine, you can use it or replace it in the [scripts](https://github.com/ReehcQ/backend_exe/blob/master/dogAPI.py).
+
 Go to the project path and run the server with bash:
 ~~~
 python dogAPI.py
