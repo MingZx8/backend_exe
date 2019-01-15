@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author: MingZZZZZZZZ
 # @Date created: 11 Jan 2019
-# @Date last modified: 14 Jan 2019
+# @Date last modified: 15 Jan 2019
 # Python Version: Python3.6
 # Description:
 
@@ -14,14 +14,15 @@ import json
 from collections import defaultdict
 
 # the setting of google fusion tables api
-api_key = ""
+api_key = "your_google_fusion_tables_api_key"
 table_id = "1pKcxc8kzJbBVzLu_kgzoAMzqYhZyUhtScXjB0BQ"
 url_ft = "https://www.googleapis.com/fusiontables/v2/tables/%s?key=%s" % (table_id, api_key)
-columns = list(map(lambda x:x['name'].lower(), requests.get(url_ft).json()['columns'][:])) # retrieve the name of columns in the table
-
+# retrieve the name of columns in the table
+columns = list(map(lambda x:x['name'].lower(), requests.get(url_ft).json()['columns'][:]))
 
 # define the sever port using 5000
 tornado.options.define('port', type=int, default=5000, help="server port")
+
 
 class CountHandler(tornado.web.RequestHandler):
     """
@@ -52,7 +53,8 @@ class CountHandler(tornado.web.RequestHandler):
         if unknown_fields:
             self.send_error(400, content=json.dumps({'unknown fields': sorted(unknown_fields)}))
         else:
-            # the query for the data in fusion tables(FT) is case sensitive, but FT does not support lower or upper function
+            # the query for the data in fusion tables(FT) is case sensitive,
+            # but FT does not support lower or upper function
             # 3 cases are considered here:
             # Upper case
             # Lower case
@@ -67,11 +69,12 @@ class CountHandler(tornado.web.RequestHandler):
                         + (str(kw_dict[arg])).title() + "'"\
                         + ")"
             # query in the Google fusion tables API
-            url_request = "https://www.googleapis.com/fusiontables/v2/query?sql=select count(dog_name) FROM %s where %s&key=%s" % (table_id, query, api_key)
+            url_request = "https://www.googleapis.com/fusiontables/v2/query?sql=select count(dog_name) FROM %s where " \
+                          "%s&key=%s" % (table_id, query, api_key)
             count_data = {'count': -999}
             try:
                 count_data['count'] = int(requests.get(url_request).json()['rows'][0][0])
-            except KeyError: # if there is not any row in the dataset
+            except KeyError:  # if there is not any row in the dataset
                 count_data['count'] = 0
             count_json = json.dumps(count_data)
             self.write(count_json)
@@ -81,8 +84,9 @@ def make_app():
     return tornado.web.Application([
         (r"/count", CountHandler),
         ],
-    debug = True
+        debug=True
     )
+
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
