@@ -14,7 +14,7 @@ import json
 from collections import defaultdict
 
 # the setting of google fusion tables api
-api_key = ""
+api_key = "placeholder"
 table_id = "1pKcxc8kzJbBVzLu_kgzoAMzqYhZyUhtScXjB0BQ"
 url_ft = "https://www.googleapis.com/fusiontables/v2/tables/%s?key=%s" % (table_id, api_key)
 columns = list(map(lambda x:x['name'].lower(), requests.get(url_ft).json()['columns'][:])) # retrieve the name of columns in the table
