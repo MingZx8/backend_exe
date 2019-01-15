@@ -32,7 +32,7 @@ class CountHandler(tornado.web.RequestHandler):
 
     def write_error(self, scode, **kwargs):
         if scode == 400:
-            self.write(str(kwargs['content']))
+            self.write(kwargs['content'])
 
     def get(self):
         global table_id, api_key
