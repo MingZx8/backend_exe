@@ -15,12 +15,13 @@ You can easily use `pip install` to install these libraries
 
 
 ## How to use the code
-First of all, you need a Google Fusion Tables API authorization key
+First of all, you need a <b><u>Google Fusion Tables API key</b></u>:
+
 [Google Fusion Tables REST API](https://developers.google.com/fusiontables/docs/v2/using)
 
-Replace it in the [scripts](https://github.com/ReehcQ/backend_exe/blob/master/dogAPI.py) as api_key.
+Replace the value of `api_key` with your key in the [scripts](https://github.com/ReehcQ/backend_exe/blob/master/dogAPI.py).
 
-Go to the project path and run the server with bash:
+Go to the project directory and run the server with bash:
 ~~~
 python dogAPI.py
 ~~~
@@ -32,6 +33,16 @@ http://localhost:5000/count?[category]=[value]
 or quering with multiply categories connected by mark '&'
 ~~~
 http://localhost:5000/count?[category1]=[value1]&[category2]=[value2]&[category3]=[value3]
+~~~
+
+*Example*:
+~~~
+http://localhost:5000/count?Dog_name=Buddy
+~~~
+
+which returns:
+~~~
+{"count": 599}
 ~~~
 
 There are 11 categories can be queried:
@@ -50,10 +61,13 @@ There are 11 categories can be queried:
 The query is <b>case insensitive</b>.
 
 ## How to do the unittest
-Open a new command prompt and run the unittest file:
+Open a new command prompt and run the unittest file (for Linux or Unix):
 ~~~
 READY_TEST_BASE_URL=http://localhost:5000 python apitest.py
 ~~~
+
+For windows, set path READY_TEST_BASE_URL=http://localhost:5000 first then run:
+`python apitest.py`
 
 
 ## Source
