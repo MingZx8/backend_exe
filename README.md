@@ -61,7 +61,7 @@ There are 11 categories can be queried:
 The query is <b>case insensitive</b>.
 
 ## How to do the unittest
-Open a new command prompt and run the unittest file (for Linux or Unix):
+Open a new command prompt, go to the project directory and run the unittest file (for Linux or Unix):
 ~~~
 READY_TEST_BASE_URL=http://localhost:5000 python apitest.py
 ~~~
